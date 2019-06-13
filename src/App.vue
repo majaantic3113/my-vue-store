@@ -1,23 +1,237 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
+  <div id="app" class="main-wrapper">
+    <app-header/>
     <router-view/>
+    <app-footer/>
   </div>
 </template>
 
 <script>
+import Header from "./components/Header.vue";
+import Footer from "./components/Footer.vue";
+
 export default {
-  name: 'App'
-}
+  name: "App",
+  components: {
+    "app-header": Header,
+    "app-footer": Footer
+  }
+};
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.App {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.main-wrapper {
+  min-height: 100%;
+  padding: 0 0 100px;
+  position: relative;
+}
+
+button,
+input,
+select,
+textarea {
+  background-color: white;
+}
+
+.navbar-default {
+  padding: 20px;
+  background-color: white;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid #ddd;
+}
+
+.navbar-default .navbar-nav.navbar-left {
+  margin: 5px 0 0 2%;
+}
+
+.navbar-default .navbar-nav.navbar-left > li > a {
+  font-size: 18px;
+}
+
+.navbar-default .navbar-nav.navbar-left > .active > a,
+.navbar-default .navbar-nav.navbar-left > .active > a:focus,
+.navbar-default .navbar-nav.navbar-left > .active > a:hover {
+  background-color: transparent;
+  border-bottom: 3px solid #337ab7;
+}
+
+.navbar-default .navbar-nav.navbar-right > li > a {
+  margin: 5px 0 0;
+  padding: 15px 20px;
+  font-size: 16px;
+}
+
+.navbar-default .navbar-nav.navbar-right > li > a,
+.navbar-default .navbar-nav.navbar-right > li > a:focus,
+.navbar-default .navbar-nav.navbar-right > li > a:hover {
+  border-radius: 3px;
+  background-color: #333;
+  border-bottom: none;
+  color: #f3f3f3;
+}
+
+.navbar-default .navbar-nav.navbar-right .dropdown-menu {
+  padding: 0;
+}
+
+.navbar-default .navbar-nav.navbar-right .dropdown-menu > li > a {
+  padding: 10px 20px;
+}
+
+.navbar-brand {
+  height: 60px;
+  padding: 0 15px;
+}
+
+.navbar-brand > img {
+  max-height: 100%;
+}
+
+footer {
+  padding: 40px 0;
+  background-color: #337ab7;
+  color: #fff;
+  bottom: 0;
+  height: 50px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}
+
+footer p {
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+}
+
+.product-wrapper {
+  min-height: 500px;
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid #8b0000;
+}
+
+.shopping-cart {
+  margin-right: 15px;
+}
+
+.Loader {
+  color: #337ab7;
+  font-size: 90px;
+  text-indent: -9999em;
+  overflow: hidden;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  margin: 72px auto;
+  position: relative;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+  animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+}
+@-webkit-keyframes load6 {
+  0% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  5%,
+  95% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  10%,
+  59% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em,
+      -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em,
+      -0.297em -0.775em 0 -0.477em;
+  }
+  20% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em,
+      -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em,
+      -0.749em -0.34em 0 -0.477em;
+  }
+  38% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em,
+      -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em,
+      -0.82em -0.09em 0 -0.477em;
+  }
+  100% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+}
+@keyframes load6 {
+  0% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  5%,
+  95% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  10%,
+  59% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em,
+      -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em,
+      -0.297em -0.775em 0 -0.477em;
+  }
+  20% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em,
+      -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em,
+      -0.749em -0.34em 0 -0.477em;
+  }
+  38% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em,
+      -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em,
+      -0.82em -0.09em 0 -0.477em;
+  }
+  100% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+}
+@-webkit-keyframes round {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes round {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }
 </style>
