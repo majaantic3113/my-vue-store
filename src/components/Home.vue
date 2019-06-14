@@ -1,13 +1,25 @@
+//  eslint-disable
+
 <template>
-  <div class="alert alert-danger"></div>
+  <div class="row is-flex">
+    <div class="row is-flex">
+      <app-categories/>
+
+      <!-- <ul class="col-sm-12 col-md-12 list-unstyled"></ul> -->
+    </div>
+  </div>
 </template>
 
 <script>
+import Categories from "./Categories.vue";
+
 export default {
-  name: "Home"
+  name: "App",
+  components: {
+    "app-categories": Categories
+  }
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-
+<style scoped>
 </style>
