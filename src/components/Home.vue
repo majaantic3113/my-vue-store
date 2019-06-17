@@ -12,9 +12,18 @@
 
 <script>
 import Categories from "./Categories.vue";
-
+import products from "../data";
 export default {
   name: "App",
+  data: function() {
+    return {
+      products: []
+    };
+  },
+  created() {
+    this.products = products;
+    console.log("lala", this.data.products);
+  },
   components: {
     "app-categories": Categories
   }

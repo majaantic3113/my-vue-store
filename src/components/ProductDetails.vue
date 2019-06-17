@@ -15,7 +15,7 @@
             <p class="card-text">Description: {{product.description}}</p>
             <p class="card-title">
               Quantity:
-              <strong>{{quantity}}</strong>
+              <strong>{{product.quantity}}</strong>
             </p>
             <button class="btn btn-primary add-to-cart">Add to Cart</button>
             <button class="btn btn-danger remove-from-cart">Remove from Cart</button>
@@ -33,6 +33,7 @@ export default {
     return {
       product: {
         name: "Product1",
+        quantity: 0,
         description: "Some product",
         id: "id",
         price: 10,
