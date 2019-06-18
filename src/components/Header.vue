@@ -28,9 +28,13 @@ export default {
   name: "Header",
   data() {
     return {
-      cartProducts: [],
       loggedIn: false
     };
+  },
+  computed: {
+    cartProducts() {
+      return this.$store.getters.cartProducts;
+    }
   }
 };
 </script>

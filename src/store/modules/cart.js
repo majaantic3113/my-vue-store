@@ -8,12 +8,26 @@ const mutations = {
     let index = cart.findIndex(el => el._id === product._id);
 
     if (index === -1) {
-      state.cartProducts = cart.push({ product, quantity: 1 });
+      state.cartProducts.push({ ...product, quantity: 1 });
     } else {
       state.cartProducts[index].quantity++;
     }
   },
-  REMOVE_PRODUCT_FROM_CART() {}
+  REMOVE_PRODUCT_FROM_CART(state, product) {
+    const cart = state.cartProducts;
+
+    let index = cart.findIndex(el => el._id === product._id);
+
+    if (index === -1) {
+      return;
+    } else {
+      if (cart[index].quantity === 1) {
+        cart.splice(index, 1);
+      } else {
+        cart[index].quantity--;
+      }
+    }
+  }
 };
 
 const actions = {

@@ -15,10 +15,13 @@
             <p class="card-text">Description: {{product.description}}</p>
             <p class="card-title">
               Quantity:
-              <strong>{{product.quantity}}</strong>
+              <strong>{{quantity}}</strong>
             </p>
-            <button class="btn btn-primary add-to-cart">Add to Cart</button>
-            <button class="btn btn-danger remove-from-cart">Remove from Cart</button>
+            <button class="btn btn-primary add-to-cart" @click="addProductToCart">Add to Cart</button>
+            <button
+              class="btn btn-danger remove-from-cart"
+              @click="removeProductFromCart"
+            >Remove from Cart</button>
           </div>
         </div>
       </div>
@@ -33,14 +36,42 @@ export default {
     return {
       product: {
         name: "Product1",
-        quantity: 0,
         description: "Some product",
-        id: "id",
+        _id: "id",
         price: 10,
         image:
           "https://cdn.shopify.com/s/files/1/0380/6785/products/SOCKS-1032_Typewriter-write-life-Socks_01_320x427.jpg?v=1549554060"
-      }
+      },
+      quantity: 0
     };
+  },
+  methods: {
+    addProductToCart() {
+      this.quantity++;
+
+      const product = {
+        _id: this.product._id,
+        name: this.product.name,
+        description: this.product.description,
+        price: this.product.price,
+        image: this.product.image,
+        quantity: this.quantity
+      };
+      this.$store.dispatch("addProductToCart", product);
+    },
+    removeProductFromCart() {
+      this.quantity > 0 && this.quantity--;
+      const product = {
+        _id: this.product._id,
+        name: this.product.name,
+        description: this.product.description,
+        price: this.product.price,
+        image: this.product.image,
+        quantity: this.quantity
+      };
+
+      this.$store.dispatch("removeProductFromCart", product);
+    }
   }
 };
 </script>

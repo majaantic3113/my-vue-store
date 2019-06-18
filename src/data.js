@@ -9,7 +9,7 @@ export const products = [
   },
   {
     name: 'Product2',
-    description: 'Some product',
+    description: 'Another product',
     _id: 'id2',
     price: 20,
     image:

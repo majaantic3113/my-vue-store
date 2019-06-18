@@ -5,6 +5,7 @@ import Home from '@/components/Home';
 import Login from '@/components/Login';
 import Register from '@/components/Register';
 import Product from '@/components/ProductDetails';
+import Cart from '@/components/Cart';
 
 Vue.use(Router);
 
@@ -22,7 +23,12 @@ const routes = [
     component: Register
   },
   {
+    path: '/cart',
+    component: Cart
+  },
+  {
     path: '/products/:id',
+    name: 'products',
     component: Product
   }
 ];
