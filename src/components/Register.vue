@@ -17,18 +17,32 @@
         <div class="submit">
           <button type="submit">Submit</button>
         </div>
+
+        <div v-if="success" class="alert alert-success">
+          You are successfully registered!
+          <div class="list-group">
+            <router-link to="/login">Login page</router-link>
+          </div>
+        </div>
+        <div v-if="error" class="alert alert-danger">You are unable to be registered!</div>
       </form>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "Register",
-  data: {
-    username: "",
-    email: "",
-    password: ""
+  data() {
+    return {
+      success: false,
+      error: false,
+      username: "",
+      email: "",
+      password: ""
+    };
   },
   methods: {
     onSubmit() {
@@ -37,7 +51,15 @@ export default {
         password: this.password,
         email: this.email
       };
-      console.log(formData);
+
+      axios
+        .post("http://localhost:8000/store/users", formData)
+        .then(data => {
+          this.success = true;
+        })
+        .catch(e => {
+          this.error = true;
+        });
     }
   }
 };
