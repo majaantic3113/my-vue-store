@@ -24,7 +24,10 @@
 
             <td>{{product.price}}$</td>
             <td>
-              <button class="btn btn-danger remove-from-cart">Remove from Cart completely</button>
+              <button
+                class="btn btn-danger remove-from-cart"
+                @click="() => removeProductFromCartCompletely(product)"
+              >Remove from Cart completely</button>
             </td>
           </tr>
         </tbody>
@@ -47,6 +50,11 @@ export default {
   computed: {
     cartProducts() {
       return this.$store.getters.cartProducts;
+    }
+  },
+  methods: {
+    removeProductFromCartCompletely(product) {
+      this.$store.dispatch("removeProductFromCartCompletely", product);
     }
   }
 };

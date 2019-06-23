@@ -15,8 +15,9 @@
           <span class="badge">{{ cartProducts.length }}</span>
         </router-link>
         <div class="links">
-          <router-link to="/login">Login</router-link>
-          <router-link to="/register">Register</router-link>
+          <router-link v-show="!loggedIn" to="/login">Login</router-link>
+          <router-link v-show="!loggedIn" to="/register">Register</router-link>
+          <router-link v-show="loggedIn" to="/purchases">Purchases</router-link>
         </div>
       </div>
     </div>
@@ -26,14 +27,12 @@
 <script>
 export default {
   name: "Header",
-  data() {
-    return {
-      loggedIn: false
-    };
-  },
   computed: {
     cartProducts() {
       return this.$store.getters.cartProducts;
+    },
+    loggedIn() {
+      return this.$store.getters.loggedIn;
     }
   }
 };

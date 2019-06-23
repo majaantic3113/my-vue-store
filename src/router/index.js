@@ -6,6 +6,7 @@ import Login from '@/components/Login';
 import Register from '@/components/Register';
 import Product from '@/components/ProductDetails';
 import Cart from '@/components/Cart';
+import Checkout from '@/components/Checkout';
 
 Vue.use(Router);
 
@@ -25,6 +26,10 @@ const routes = [
   {
     path: '/cart',
     component: Cart
+  },
+  {
+    path: '/checkout',
+    component: Checkout
   },
   {
     path: '/products/:id',

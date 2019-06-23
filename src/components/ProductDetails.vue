@@ -30,31 +30,29 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "Product",
   data: function() {
     return {
-      product: {
-        name: "Product1",
-        description: "Some product",
-        _id: "id",
-        price: 10,
-        image:
-          "https://cdn.shopify.com/s/files/1/0380/6785/products/SOCKS-1032_Typewriter-write-life-Socks_01_320x427.jpg?v=1549554060"
-      },
+      product: null,
       quantity: 0
     };
+  },
+  created() {
+    axios
+      .get("http://localhost:8000/store/products/?id=" + this.$route.params.id)
+      .then(result => {
+        this.product = result.data[0];
+      });
   },
   methods: {
     addProductToCart() {
       this.quantity++;
 
       const product = {
-        _id: this.product._id,
-        name: this.product.name,
-        description: this.product.description,
-        price: this.product.price,
-        image: this.product.image,
+        ...this.product,
         quantity: this.quantity
       };
       this.$store.dispatch("addProductToCart", product);
@@ -62,11 +60,7 @@ export default {
     removeProductFromCart() {
       this.quantity > 0 && this.quantity--;
       const product = {
-        _id: this.product._id,
-        name: this.product.name,
-        description: this.product.description,
-        price: this.product.price,
-        image: this.product.image,
+        ...this.product,
         quantity: this.quantity
       };
 

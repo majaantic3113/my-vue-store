@@ -9,14 +9,12 @@
 <script>
 import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
-import Categories from "./components/Categories.vue";
 
 export default {
   name: "App",
   components: {
     "app-header": Header,
-    "app-footer": Footer,
-    "app-categories": Categories
+    "app-footer": Footer
   }
 };
 </script>

@@ -4,6 +4,25 @@
   <div class="container">
     <h1>Store</h1>
 
+    <div>
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-right">
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="categories">
+              <router-link
+                v-bind:key="category.name"
+                v-for="category in categories"
+                type="button"
+                class="btn btn-primary"
+                role="button"
+                :to="{ path: '/', query: { category: category.name }}"
+                v-on:click.native="filter"
+              >{{category.name}}</router-link>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
     <ul class="col-sm-12 col-md-12 list-unstyled">
       <li
         v-bind:key="product._id"
@@ -29,23 +48,60 @@
 </template>
 
 <script>
-import Categories from "./Categories.vue";
-import { products } from "../data";
+import axios from "axios";
+
 export default {
   name: "App",
   data: function() {
     return {
-      products: []
+      products: [],
+      categories: []
     };
   },
   created() {
-    this.products = products;
+    axios.get("http://localhost:8000/store/products").then(data => {
+      this.products = data.data;
+    });
+
+    axios.get("http://localhost:8000/store/categories").then(data => {
+      this.categories = data.data;
+    });
+
+    let token = localStorage.getItem("token");
+
+    if (token) {
+      this.$store.dispatch("setIfUserIsLoggedIn", true);
+    }
   },
-  components: {
-    "app-categories": Categories
+  methods: {
+    filter() {
+      axios
+        .get("http://localhost:8000/store/products", {
+          params: {
+            category: this.$route.query.category
+          }
+        })
+        .then(results => {
+          this.products = results.data;
+        });
+    }
   }
 };
 </script>
 
 <style scoped>
+img {
+  width: 300px;
+  height: 400px;
+}
+
+.categories {
+  display: flex;
+  margin-left: auto;
+  margin-right: 30px;
+}
+
+a {
+  margin-right: 5px;
+}
 </style>

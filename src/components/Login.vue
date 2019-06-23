@@ -19,11 +19,14 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "Login",
   data: {
     username: "",
-    password: ""
+    password: "",
+    error: null
   },
   methods: {
     onSubmit() {
@@ -31,7 +34,20 @@ export default {
         username: this.username,
         password: this.password
       };
-      console.log(formData);
+
+      axios
+        .post("http://localhost:8000/store/auth/authenticateuser", formData)
+        .then(response => {
+          localStorage.setItem("token", response.data.data.token);
+
+          this.$store.dispatch("setIfUserIsLoggedIn", true);
+          this.$store.dispatch("setUsername", formData.username);
+
+          this.$router.push("/");
+        })
+        .catch(() => {
+          this.error = "This task can not be deleted!";
+        });
     }
   }
 };
